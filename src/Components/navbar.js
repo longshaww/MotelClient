@@ -6,18 +6,16 @@ export default class Navbar extends Component {
 		return (
 			<MDBNavbar light bgColor="light">
 				<MDBContainer fluid>
-					<a className="navbar-brand" href="/#">
+					<a className="navbar-brand" href="/">
 						Navbar
 					</a>
-					<form className="d-flex input-group w-auto">
-						<input
-							onKeyUp={this.props.onKeyUp}
-							type="search"
-							className="form-control"
-							placeholder="Type query"
-							aria-label="Search"
-						/>
-					</form>
+					<input
+						onKeyUp={this.props.onKeyUp}
+						type="search"
+						className="form-control d-flex input-group w-auto"
+						placeholder="Type query"
+						aria-label="Search"
+					/>
 				</MDBContainer>
 			</MDBNavbar>
 		);

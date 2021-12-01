@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
-import { MDBContainer, MDBBtn, MDBIcon } from "mdb-react-ui-kit";
+import { MDBContainer, MDBBtn } from "mdb-react-ui-kit";
 
 import Navbar from "./Components/navbar";
 import Card from "./Components/card";
