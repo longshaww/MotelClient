@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
-import { MDBContainer, MDBBtn } from "mdb-react-ui-kit";
+import { MDBContainer } from "mdb-react-ui-kit";
 
 import Navbar from "./Components/navbar";
 import Card from "./Components/card";
+import Modal from "./Components/modal";
 import "./App.css";
 let data;
 class App extends Component {
@@ -21,7 +22,12 @@ class App extends Component {
 		const url = "https://dreamhotel.herokuapp.com/api/rooms";
 		const response = await fetch(url);
 		data = await response.json();
-		this.setState({ rooms: data, loading: false });
+		this.setState({
+			rooms: data.sort((a, b) => {
+				return a.room_id - b.room_id;
+			}),
+			loading: false,
+		});
 	}
 	async componentDidMount() {
 		await this.getData();
@@ -49,14 +55,7 @@ class App extends Component {
 			<div className="App">
 				<Navbar onKeyUp={this.onKeyUp} />
 				<MDBContainer>
-					<MDBBtn
-						onClick={this.onClick}
-						rounded
-						color="dark"
-						tag="a"
-					>
-						Create
-					</MDBBtn>
+					<Modal />
 					<Card rooms={rooms} />
 				</MDBContainer>
 			</div>
