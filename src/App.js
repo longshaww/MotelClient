@@ -1,66 +1,62 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import { MDBContainer } from "mdb-react-ui-kit";
 
 import Navbar from "./Components/navbar";
 import Card from "./Components/card";
-import Modal from "./Components/modal";
+import CreateModal from "./Components/create-modal";
 import "./App.css";
 let data;
-class App extends Component {
-	constructor() {
-		super();
+function App() {
+	const [rooms, setRooms] = useState([]);
+	const [loading, setLoading] = useState(true);
 
-		this.state = {
-			loading: true,
-			rooms: [],
-		};
-		this.onClick = this.onClick.bind(this);
-		this.onKeyUp = this.onKeyUp.bind(this);
-	}
-	async getData() {
-		const url = "https://dreamhotel.herokuapp.com/api/rooms";
-		const response = await fetch(url);
-		data = await response.json();
-		this.setState({
-			rooms: data.sort((a, b) => {
-				return a.room_id - b.room_id;
-			}),
-			loading: false,
-		});
-	}
-	async componentDidMount() {
-		await this.getData();
-	}
+	useEffect(() => {
+		async function getData() {
+			const url = "https://dreamhotel.herokuapp.com/api/rooms";
+			const response = await fetch(url);
+			data = await response.json();
+			setRooms(data);
+		}
+		getData();
+	}, []);
 
-	onKeyUp(event) {
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setLoading(false);
+		}, 500);
+		return () => clearInterval(interval);
+	}, []);
+
+	const onKeyUp = (event) => {
 		const value = event.target.value;
-		this.setState({
-			rooms: value
+		setRooms(
+			value
 				? data.filter((room) => {
 						return room.room_id.indexOf(value) !== -1;
 				  })
-				: data,
-		});
-	}
-	onClick() {
-		alert("Hello");
-	}
-	render() {
-		const { loading, rooms } = this.state;
-		if (loading) {
-			return <div>Loading</div>;
-		}
-		return (
-			<div className="App">
-				<Navbar onKeyUp={this.onKeyUp} />
-				<MDBContainer>
-					<Modal />
-					<Card rooms={rooms} />
-				</MDBContainer>
-			</div>
+				: data
 		);
+	};
+
+	function addRoom(room) {
+		setRooms((values) => [...values, room]);
 	}
+	return (
+		<div className="App">
+			{loading ? (
+				<div>Loading</div>
+			) : (
+				<>
+					<Navbar onKeyUp={onKeyUp} />
+					<MDBContainer>
+						<CreateModal addRoom={addRoom} />
+						<Card rooms={rooms} />
+					</MDBContainer>
+				</>
+			)}
+		</div>
+	);
 }
 
 export default App;

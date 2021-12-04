@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+
 import {
 	MDBInputGroup,
 	MDBInputGroupText,
 	MDBInputGroupElement,
 } from "mdb-react-ui-kit";
 
-export default function Form() {
+export default function CreateForm({ addRoom }) {
 	const [inputs, setInputs] = useState({});
 	const MySwal = withReactContent(Swal);
 	const handleChange = (event) => {
@@ -20,15 +21,19 @@ export default function Form() {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		// console.log(inputs);
-		await fetch("http://localhost:4000/api/rooms", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(inputs),
-		});
+		const response = await fetch(
+			"https://dreamhotel.herokuapp.com/api/rooms",
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(inputs),
+			}
+		);
 		await MySwal.fire({
-			title: <p>Good job!</p>,
+			title: <p>Added new room</p>,
 			icon: "success",
 		});
+		addRoom(await response.json());
 	};
 	return (
 		<form onSubmit={handleSubmit} id="form">

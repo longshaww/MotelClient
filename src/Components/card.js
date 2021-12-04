@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import {
 	MDBRow,
 	MDBCol,
@@ -9,44 +10,49 @@ import {
 	MDBBtn,
 } from "mdb-react-ui-kit";
 
-export default class Card extends Component {
-	render() {
-		const { rooms } = this.props;
-		return (
-			<MDBRow>
-				{rooms.map((room, index) => {
-					return (
-						<MDBCol key={index} md="3">
-							<MDBCard
-								className="mt-5"
-								style={{ maxWidth: "22rem" }}
-							>
-								<MDBCardImage
-									src={room.image}
-									position="top"
-									alt="..."
-								/>
-								<MDBCardBody>
-									<MDBCardTitle>
-										{`Phòng ${room.room_id}`}
-									</MDBCardTitle>
-									<div className="Content">
-										<div>{room.room_type}</div>
-										<div>{room.price}</div>
-										<div>{room.note}</div>
-									</div>
-									<MDBBtn
-										href="#"
-										className="d-flex justify-content-center"
-									>
-										View
-									</MDBBtn>
-								</MDBCardBody>
-							</MDBCard>
-						</MDBCol>
-					);
-				})}
-			</MDBRow>
-		);
-	}
+Card.propTypes = {
+	rooms: PropTypes.array,
+};
+Card.defaultProps = {
+	rooms: [],
+};
+
+export default function Card(props) {
+	const { rooms } = props;
+	return (
+		<MDBRow>
+			{rooms.map((room, index) => {
+				return (
+					<MDBCol key={index} md="3">
+						<MDBCard
+							className="mt-5"
+							style={{ maxWidth: "22rem" }}
+						>
+							<MDBCardImage
+								src={room.image}
+								position="top"
+								alt="..."
+							/>
+							<MDBCardBody>
+								<MDBCardTitle>
+									{`Phòng ${room.room_id}`}
+								</MDBCardTitle>
+								<div className="Content">
+									<div>{room.room_type}</div>
+									<div>{room.price}</div>
+									<div>{room.note}</div>
+								</div>
+								<MDBBtn
+									href="#"
+									className="d-flex justify-content-center"
+								>
+									View
+								</MDBBtn>
+							</MDBCardBody>
+						</MDBCard>
+					</MDBCol>
+				);
+			})}
+		</MDBRow>
+	);
 }

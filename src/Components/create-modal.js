@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
 	MDBBtn,
 	MDBModal,
@@ -9,11 +10,10 @@ import {
 	MDBModalBody,
 	MDBModalFooter,
 } from "mdb-react-ui-kit";
-import Form from "../Components/form";
+import CreateForm from "./create-form";
 
-export default function Modal() {
+export default function CreateModal({ addRoom }) {
 	const [basicModal, setBasicModal] = useState(false);
-
 	const toggleShow = () => setBasicModal(!basicModal);
 
 	return (
@@ -35,7 +35,7 @@ export default function Modal() {
 							></MDBBtn>
 						</MDBModalHeader>
 						<MDBModalBody>
-							<Form />
+							<CreateForm addRoom={addRoom} />
 						</MDBModalBody>
 
 						<MDBModalFooter>
