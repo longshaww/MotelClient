@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
-import { MDBContainer } from "mdb-react-ui-kit";
+
+import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./Components/navbar";
-import Card from "./Components/card";
-import CreateModal from "./Components/create-modal";
+
+import Room from "./pages/room.js";
 import "./App.css";
+
+function About() {
+	return <h2>About</h2>;
+}
 let data;
 function App() {
 	const [rooms, setRooms] = useState([]);
@@ -16,7 +21,11 @@ function App() {
 			const url = "https://dreamhotel.herokuapp.com/api/rooms";
 			const response = await fetch(url);
 			data = await response.json();
-			setRooms(data);
+			setRooms(
+				data.sort((a, b) => {
+					return a.room_id - b.room_id;
+				})
+			);
 		}
 		getData();
 	}, []);
@@ -49,10 +58,15 @@ function App() {
 			) : (
 				<>
 					<Navbar onKeyUp={onKeyUp} />
-					<MDBContainer>
-						<CreateModal addRoom={addRoom} />
-						<Card rooms={rooms} />
-					</MDBContainer>
+					<Routes>
+						<Route
+							path="/"
+							element={
+								<Room addRoom={addRoom} rooms={rooms} />
+							}
+						/>
+						<Route path="/about" element={<About />} />
+					</Routes>
 				</>
 			)}
 		</div>

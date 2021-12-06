@@ -42,10 +42,8 @@ export default function Card(props) {
 									<div>{room.price}</div>
 									<div>{room.note}</div>
 								</div>
-								<MDBBtn
-									href="#"
-									className="d-flex justify-content-center"
-								>
+
+								<MDBBtn className="d-flex justify-content-center">
 									View
 								</MDBBtn>
 							</MDBCardBody>
