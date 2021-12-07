@@ -8,6 +8,7 @@ export default function Navbar(props) {
 		<MDBNavbar light bgColor="light">
 			<MDBContainer fluid>
 				<Link to="/">Home</Link>
+				<Link to="/rooms">Room</Link>
 				<Link to="/about">About</Link>
 				<input
 					onKeyUp={onKeyUp}

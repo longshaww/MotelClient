@@ -9,6 +9,7 @@ import {
 	MDBCardImage,
 	MDBBtn,
 } from "mdb-react-ui-kit";
+import { Link } from "react-router-dom";
 
 Card.propTypes = {
 	rooms: PropTypes.array,
@@ -19,6 +20,7 @@ Card.defaultProps = {
 
 export default function Card(props) {
 	const { rooms } = props;
+
 	return (
 		<MDBRow>
 			{rooms.map((room, index) => {
@@ -44,7 +46,9 @@ export default function Card(props) {
 								</div>
 
 								<MDBBtn className="d-flex justify-content-center">
-									View
+									<Link to={`/rooms/${room._id}`}>
+										View
+									</Link>
 								</MDBBtn>
 							</MDBCardBody>
 						</MDBCard>

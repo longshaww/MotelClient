@@ -6,6 +6,8 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./Components/navbar";
 
 import Room from "./pages/room.js";
+import Home from "./pages/home.js";
+import ViewRoom from "./pages/room.js";
 import "./App.css";
 
 function About() {
@@ -59,12 +61,15 @@ function App() {
 				<>
 					<Navbar onKeyUp={onKeyUp} />
 					<Routes>
+						<Route path="/" element={<Home />} />
 						<Route
-							path="/"
+							path="/rooms"
 							element={
 								<Room addRoom={addRoom} rooms={rooms} />
 							}
-						/>
+						>
+							<Route path=":id" element={<ViewRoom />} />
+						</Route>
 						<Route path="/about" element={<About />} />
 					</Routes>
 				</>
