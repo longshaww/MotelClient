@@ -7,7 +7,6 @@ import {
 	MDBCardBody,
 	MDBCardTitle,
 	MDBCardImage,
-	MDBBtn,
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 
@@ -44,12 +43,9 @@ export default function Card(props) {
 									<div>{room.price}</div>
 									<div>{room.note}</div>
 								</div>
-
-								<MDBBtn className="d-flex justify-content-center">
-									<Link to={`/rooms/${room._id}`}>
-										View
-									</Link>
-								</MDBBtn>
+								<Link to={`/rooms/${room._id}`}>
+									View
+								</Link>
 							</MDBCardBody>
 						</MDBCard>
 					</MDBCol>

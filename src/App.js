@@ -7,12 +7,13 @@ import Navbar from "./Components/navbar";
 
 import Room from "./pages/room.js";
 import Home from "./pages/home.js";
-import ViewRoom from "./pages/room.js";
+import ViewRoom from "./pages/view.js";
 import "./App.css";
 
 function About() {
 	return <h2>About</h2>;
 }
+
 let data;
 function App() {
 	const [rooms, setRooms] = useState([]);
@@ -62,12 +63,16 @@ function App() {
 					<Navbar onKeyUp={onKeyUp} />
 					<Routes>
 						<Route path="/" element={<Home />} />
-						<Route
-							path="/rooms"
-							element={
-								<Room addRoom={addRoom} rooms={rooms} />
-							}
-						>
+						<Route path="rooms">
+							<Route
+								index
+								element={
+									<Room
+										addRoom={addRoom}
+										rooms={rooms}
+									/>
+								}
+							/>
 							<Route path=":id" element={<ViewRoom />} />
 						</Route>
 						<Route path="/about" element={<About />} />

@@ -1,14 +1,30 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
 export default function ViewRoom() {
-	const [room, setRoom] = useState();
+	const [room, setRoom] = useState(null);
+	const { id } = useParams();
+
 	useEffect(() => {
-		async function getData(room) {
-			const url = `https://dreamhotel.herokuapp.com/api/rooms/${room._id}`;
+		async function getData() {
+			const url = `https://dreamhotel.herokuapp.com/api/rooms/${id}`;
 			const response = await fetch(url);
-			data = await response.json();
+			const data = await response.json();
 			setRoom(data);
 		}
-	});
-
-	return <div>hjjjjj</div>;
+		getData();
+	}, [id]);
+	console.log(room);
+	return (
+		<div>
+			{!room ? (
+				<div>Fetching ....</div>
+			) : (
+				<>
+					<div>{room.price}</div>
+					<div>{room.note}</div>
+				</>
+			)}
+		</div>
+	);
 }
