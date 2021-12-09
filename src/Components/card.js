@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import {
 	MDBRow,
@@ -9,6 +9,8 @@ import {
 	MDBCardImage,
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getRoomPage } from "../actions/get-room-home";
 
 Card.propTypes = {
 	rooms: PropTypes.array,
@@ -17,8 +19,25 @@ Card.defaultProps = {
 	rooms: [],
 };
 
-export default function Card(props) {
-	const { rooms } = props;
+export default function Card() {
+	const rooms = useSelector((state) => state.RoomHomePage.rooms);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		async function getData() {
+			const url = "https://dreamhotel.herokuapp.com/api/rooms";
+			const response = await fetch(url);
+			const data = await response.json();
+			dispatch(
+				getRoomPage(
+					data.sort((a, b) => {
+						return a.room_id - b.room_id;
+					})
+				)
+			);
+		}
+		getData();
+	}, [dispatch]);
 
 	return (
 		<MDBRow>

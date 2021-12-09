@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-
+import { addRoomAction } from "../actions/get-room-home";
+import { useDispatch } from "react-redux";
 import {
 	MDBInputGroup,
 	MDBInputGroupText,
 	MDBInputGroupElement,
 } from "mdb-react-ui-kit";
 
-export default function CreateForm({ addRoom }) {
+export default function CreateForm() {
+	const dispatch = useDispatch();
+
 	const [inputs, setInputs] = useState({});
 	const MySwal = withReactContent(Swal);
+
 	const handleChange = (event) => {
 		const name = event.target.name;
 		const value = event.target.value;
@@ -33,7 +37,7 @@ export default function CreateForm({ addRoom }) {
 			title: <p>Added new room</p>,
 			icon: "success",
 		});
-		addRoom(await response.json());
+		dispatch(addRoomAction(await response.json()));
 	};
 	return (
 		<form onSubmit={handleSubmit} id="form">

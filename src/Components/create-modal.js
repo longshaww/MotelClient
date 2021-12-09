@@ -12,7 +12,7 @@ import {
 } from "mdb-react-ui-kit";
 import CreateForm from "./create-form";
 
-export default function CreateModal({ addRoom }) {
+export default function CreateModal() {
 	const [basicModal, setBasicModal] = useState(false);
 	const toggleShow = () => setBasicModal(!basicModal);
 
@@ -35,7 +35,7 @@ export default function CreateModal({ addRoom }) {
 							></MDBBtn>
 						</MDBModalHeader>
 						<MDBModalBody>
-							<CreateForm addRoom={addRoom} />
+							<CreateForm />
 						</MDBModalBody>
 
 						<MDBModalFooter>
