@@ -37,7 +37,7 @@ function App() {
 					<Navbar />
 					<Routes>
 						<Route path="/" element={<Home />} />
-						<Route path="rooms">
+						<Route path="management">
 							<Route index element={<Room />} />
 							<Route path=":id" element={<ViewRoom />} />
 						</Route>

@@ -25,7 +25,7 @@ export default function Card() {
 
 	useEffect(() => {
 		async function getData() {
-			const url = "https://dreamhotel.herokuapp.com/api/rooms";
+			const url = "http://localhost:4000/management";
 			const response = await fetch(url);
 			const data = await response.json();
 			dispatch(
@@ -59,10 +59,9 @@ export default function Card() {
 								</MDBCardTitle>
 								<div className="Content">
 									<div>{room.room_type}</div>
-									<div>{room.price}</div>
 									<div>{room.note}</div>
 								</div>
-								<Link to={`/rooms/${room._id}`}>
+								<Link to={`/management/${room._id}`}>
 									View
 								</Link>
 							</MDBCardBody>

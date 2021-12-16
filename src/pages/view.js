@@ -7,7 +7,7 @@ export default function ViewRoom() {
 
 	useEffect(() => {
 		async function getData() {
-			const url = `https://dreamhotel.herokuapp.com/api/rooms/${id}`;
+			const url = `http://localhost:4000/management/${id}`;
 			const response = await fetch(url);
 			const data = await response.json();
 			setRoom(data);
