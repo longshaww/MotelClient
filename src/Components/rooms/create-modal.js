@@ -18,7 +18,7 @@ export default function CreateModal() {
 
 	return (
 		<>
-			<MDBBtn onClick={toggleShow}>Create</MDBBtn>
+			<MDBBtn onClick={toggleShow}>Thêm phòng</MDBBtn>
 			<MDBModal
 				show={basicModal}
 				setShow={setBasicModal}
@@ -27,7 +27,7 @@ export default function CreateModal() {
 				<MDBModalDialog>
 					<MDBModalContent>
 						<MDBModalHeader>
-							<MDBModalTitle>Modal title</MDBModalTitle>
+							<MDBModalTitle>Thêm phòng mới</MDBModalTitle>
 							<MDBBtn
 								className="btn-close"
 								color="none"
@@ -43,10 +43,10 @@ export default function CreateModal() {
 								color="secondary"
 								onClick={toggleShow}
 							>
-								Close
+								Thoát
 							</MDBBtn>
 							<MDBBtn type="submit" form="form">
-								Send
+								Gửi
 							</MDBBtn>
 						</MDBModalFooter>
 					</MDBModalContent>

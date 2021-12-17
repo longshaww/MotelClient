@@ -2,7 +2,7 @@ import React from "react";
 import { MDBContainer, MDBNavbar } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getRoomPage } from "../actions/get-room-home";
+import { setRooms } from "../../actions/rooms";
 
 export default function Navbar() {
 	const rooms = useSelector((state) => state.RoomHomePage.rooms);
@@ -11,7 +11,7 @@ export default function Navbar() {
 	const onKeyUp = (event) => {
 		const value = event.target.value;
 		dispatch(
-			getRoomPage(
+			setRooms(
 				value
 					? rooms.filter((room) => {
 							return room.room_id.indexOf(value) !== -1;
@@ -23,9 +23,9 @@ export default function Navbar() {
 	return (
 		<MDBNavbar light bgColor="light">
 			<MDBContainer fluid>
-				<Link to="/">Home</Link>
-				<Link to="/management">Room</Link>
-				<Link to="/about">About</Link>
+				<Link to="/">Trang chủ</Link>
+				<Link to="/management">Quản lý</Link>
+				<Link to="/about">Thông tin</Link>
 				<input
 					onKeyUp={onKeyUp}
 					type="search"

@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import { getRoomHomePageReducer as RoomHomePage } from "./get-room-home.js";
+import { getRoomHomePageReducer as RoomHomePage } from "./rooms.js";
 import { loadingState } from "./loading.js";
 
 const rootReducer = combineReducers({

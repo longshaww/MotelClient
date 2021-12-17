@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { addRoomAction } from "../actions/get-room-home";
 import { useDispatch } from "react-redux";
+import { addRoomAction } from "../../actions/rooms";
 import {
 	MDBInputGroup,
 	MDBInputGroupText,
@@ -24,17 +24,13 @@ export default function CreateForm() {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		// console.log(inputs);
-		const response = await fetch(
-			"https://dreamhotel.herokuapp.com/api/rooms",
-			{
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(inputs),
-			}
-		);
+		const response = await fetch("http://localhost:4000/management", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(inputs),
+		});
 		await MySwal.fire({
-			title: <p>Added new room</p>,
+			title: <p>Đã thêm phòng mới</p>,
 			icon: "success",
 		});
 		dispatch(addRoomAction(await response.json()));
@@ -48,7 +44,7 @@ export default function CreateForm() {
 					name="room_type"
 					value={inputs.room_type || ""}
 					onChange={handleChange}
-					placeholder="Room type"
+					placeholder="Loại phòng"
 				/>
 			</MDBInputGroup>
 			<MDBInputGroup className="mb-3">
@@ -58,28 +54,34 @@ export default function CreateForm() {
 					name="price"
 					value={inputs.price || ""}
 					onChange={handleChange}
-					placeholder="Price"
+					placeholder="Giá"
 				/>
-			</MDBInputGroup>
-			<MDBInputGroup className="mb-3">
-				<MDBInputGroupText>@</MDBInputGroupText>
-				<MDBInputGroupElement type="text" placeholder="Note" />
 			</MDBInputGroup>
 			<MDBInputGroup className="mb-3">
 				<MDBInputGroupText>@</MDBInputGroupText>
 				<MDBInputGroupElement
 					type="text"
-					name="room_state"
-					value={inputs.room_state || ""}
+					name="note"
+					value={inputs.note || ""}
 					onChange={handleChange}
-					placeholder="Room State"
+					placeholder="Ghi chú"
 				/>
 			</MDBInputGroup>
 			<MDBInputGroup className="mb-3">
 				<MDBInputGroupText>@</MDBInputGroupText>
 				<MDBInputGroupElement
 					type="text"
-					placeholder="Room Id"
+					name="state"
+					value={inputs.state || ""}
+					onChange={handleChange}
+					placeholder="Trạng thái"
+				/>
+			</MDBInputGroup>
+			<MDBInputGroup className="mb-3">
+				<MDBInputGroupText>@</MDBInputGroupText>
+				<MDBInputGroupElement
+					type="text"
+					placeholder="Số phòng"
 					value={inputs.room_id || ""}
 					onChange={handleChange}
 					name="room_id"

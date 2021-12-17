@@ -14,11 +14,10 @@ export default function ViewRoom() {
 		}
 		getData();
 	}, [id]);
-	console.log(room);
 	return (
 		<div>
 			{!room ? (
-				<div>Fetching ....</div>
+				<div>Đang tải về ....</div>
 			) : (
 				<>
 					<div>{room.price}</div>

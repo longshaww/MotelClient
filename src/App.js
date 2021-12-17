@@ -3,7 +3,7 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 
 import { Routes, Route } from "react-router-dom";
 
-import Navbar from "./Components/navbar";
+import Navbar from "./Components/rooms/navbar";
 
 import Room from "./pages/room.js";
 import Home from "./pages/home.js";
