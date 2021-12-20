@@ -1,3 +1,9 @@
+import axios from "axios";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
+
 const FETCHED_DATA_ROOM_HOME = "FETCHED_DATA_ROOM_HOME";
 const ADD_ROOM = "ADD_ROOM";
 
@@ -6,15 +12,14 @@ export const setRooms = (data) => ({
 	payload: data,
 });
 
-export const addRoomAction = (data) => ({
+export const addedRoom = (data) => ({
 	type: ADD_ROOM,
 	payload: data,
 });
 
-export const fetchRooms = async (dispatch) => {
-	const url = "http://localhost:4000/management";
-	const response = await fetch(url);
-	const data = await response.json();
+export const fetchRooms = () => async (dispatch) => {
+	const res = await axios.get(`${process.env.REACT_APP_ROOM_API}`);
+	const data = await res.data;
 	dispatch(
 		setRooms(
 			data.sort((a, b) => {
@@ -22,4 +27,13 @@ export const fetchRooms = async (dispatch) => {
 			})
 		)
 	);
+};
+
+export const postRoom = (room) => async (dispatch) => {
+	await axios.post("http://localhost:4000/management", room);
+	await MySwal.fire({
+		title: <p>Đã thêm phòng mới</p>,
+		icon: "success",
+	});
+	dispatch(addedRoom(room));
 };

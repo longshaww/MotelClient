@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Card from "../Components/rooms/card";
-import { setRooms, addRoomAction } from "../actions/rooms";
+import { setRooms, addedRoom } from "../actions/rooms";
 import { fetchRooms } from "../actions/rooms";
 
 const mapStateToProps = (state) => {
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
 const mapActionToProps = (dispatch) => ({
 	setRooms: (data) => dispatch(setRooms(data)),
 	fetchRooms: () => dispatch(fetchRooms()),
-	addRoomAction: (data) => dispatch(addRoomAction(data)),
+	addedRoom: (data) => dispatch(addedRoom(data)),
 });
 
 export default connect(mapStateToProps, mapActionToProps)(Card);

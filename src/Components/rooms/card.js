@@ -8,7 +8,6 @@ import {
 	MDBCardImage,
 } from "mdb-react-ui-kit";
 import { Link } from "react-router-dom";
-import CreateModal from "./create-modal";
 
 export default function Card({ rooms, fetchRooms }) {
 	useEffect(() => {
@@ -17,7 +16,6 @@ export default function Card({ rooms, fetchRooms }) {
 
 	return (
 		<>
-			<CreateModal />
 			<MDBRow>
 				{rooms.map((room, index) => {
 					return (

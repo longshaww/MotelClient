@@ -13,40 +13,96 @@ import {
 import CreateForm from "./create-form";
 
 export default function CreateModal() {
-	const [basicModal, setBasicModal] = useState(false);
-	const toggleShow = () => setBasicModal(!basicModal);
+	const [toggleOneModal, setToggleOneModal] = useState(false);
+	const [toggleTwoModal, setToggleTwoModal] = useState(false);
 
 	return (
 		<>
-			<MDBBtn onClick={toggleShow}>Thêm phòng</MDBBtn>
+			<MDBBtn onClick={() => setToggleOneModal(!toggleOneModal)}>
+				Thêm
+			</MDBBtn>
+
 			<MDBModal
-				show={basicModal}
-				setShow={setBasicModal}
+				show={toggleOneModal}
+				setShow={setToggleOneModal}
 				tabIndex="-1"
 			>
-				<MDBModalDialog>
+				<MDBModalDialog centered>
 					<MDBModalContent>
 						<MDBModalHeader>
-							<MDBModalTitle>Thêm phòng mới</MDBModalTitle>
+							<MDBModalTitle>
+								Biểu mẫu thêm phòng
+							</MDBModalTitle>
 							<MDBBtn
 								className="btn-close"
 								color="none"
-								onClick={toggleShow}
+								onClick={() =>
+									setToggleOneModal(!toggleOneModal)
+								}
 							></MDBBtn>
 						</MDBModalHeader>
 						<MDBModalBody>
 							<CreateForm />
 						</MDBModalBody>
-
 						<MDBModalFooter>
 							<MDBBtn
-								color="secondary"
-								onClick={toggleShow}
+								onClick={() => {
+									setToggleOneModal(!toggleOneModal);
+									setTimeout(() => {
+										setToggleTwoModal(
+											!toggleTwoModal
+										);
+									}, 200);
+								}}
 							>
-								Thoát
-							</MDBBtn>
-							<MDBBtn type="submit" form="form">
 								Gửi
+							</MDBBtn>
+						</MDBModalFooter>
+					</MDBModalContent>
+				</MDBModalDialog>
+			</MDBModal>
+
+			<MDBModal
+				show={toggleTwoModal}
+				setShow={setToggleTwoModal}
+				tabIndex="-1"
+			>
+				<MDBModalDialog centered>
+					<MDBModalContent>
+						<MDBModalHeader>
+							<MDBModalTitle>Xác nhận</MDBModalTitle>
+							<MDBBtn
+								className="btn-close"
+								color="none"
+								onClick={() =>
+									setToggleTwoModal(!toggleTwoModal)
+								}
+							></MDBBtn>
+						</MDBModalHeader>
+						<MDBModalBody>
+							Bạn có chắc muốn thêm phòng này ?
+						</MDBModalBody>
+						<MDBModalFooter>
+							<MDBBtn
+								onClick={() => {
+									setToggleTwoModal(!toggleTwoModal);
+									setTimeout(() => {
+										setToggleOneModal(
+											!toggleOneModal
+										);
+									}, 400);
+								}}
+							>
+								Trở về trang trước
+							</MDBBtn>
+							<MDBBtn
+								type="submit"
+								form="form"
+								onClick={() =>
+									setToggleTwoModal(!toggleTwoModal)
+								}
+							>
+								Xác nhận
 							</MDBBtn>
 						</MDBModalFooter>
 					</MDBModalContent>
