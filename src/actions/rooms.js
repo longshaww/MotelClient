@@ -30,10 +30,11 @@ export const fetchRooms = () => async (dispatch) => {
 };
 
 export const postRoom = (room) => async (dispatch) => {
-	await axios.post("http://localhost:4000/management", room);
+	const res = await axios.post(`${process.env.REACT_APP_ROOM_API}`, room);
+	console.log(res);
 	await MySwal.fire({
 		title: <p>Đã thêm phòng mới</p>,
 		icon: "success",
 	});
-	dispatch(addedRoom(room));
+	dispatch(addedRoom(res.data));
 };
